@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import './ExpenseForm.css'
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
     // Approach #1: update values separate states
     const [enteredTitle, setEnteredTitle] = useState('');
     const [enteredAmount, setEnteredAmount] = useState('');
@@ -15,6 +15,7 @@ const ExpenseForm = () => {
     // });
 
     const titleChangeHandler = event => {
+        // Approach #1: update values separate states
         setEnteredTitle(event.target.value);
         // Approach #2: update values using same state
         // setUserInput((prevState) => {
@@ -29,28 +30,10 @@ const ExpenseForm = () => {
 
     const amountChangeHandler = event => {
         setEnteredAmount(event.target.value);
-        // Approach #2: update values using same state
-        // setUserInput((prevState) => {
-        //     return {
-                //takes the whole object
-        //         ...prevState,
-                //overwrite the enteredDate value
-        //         enteredAmount: event.target.value,
-        //     }
-        // });
     };
 
     const dateChangeHandler = event => {
         setEnteredDate(event.target.value);
-        // Approach #2: update values using same state
-        // setUserInput((prevState) => {
-        //     return {
-                    //takes the whole object
-        //         ...prevState,
-                    //overwrite the enteredDate value
-        //         enteredDate: event.target.value,
-        //     }
-        // });
     };
 
     const submitHandler = event => {
@@ -63,7 +46,7 @@ const ExpenseForm = () => {
           date: new Date(enteredDate)
         };
 
-        console.log(expenseData)
+        props.onSaveExpenseData(expenseData);
         //clear inputs
         setEnteredTitle('');
         setEnteredAmount('');
